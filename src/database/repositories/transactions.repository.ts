@@ -8,7 +8,7 @@ import { Transaction } from '../../entities/transactions.entity';
 import { TransactionModel } from '../schemas/transactions.schema';
 
 export class TransactionsRepository {
-  constructor(private model: typeof TransactionModel) {}
+  constructor(private model: typeof TransactionModel) { }
 
   async create({
     title,
@@ -46,7 +46,7 @@ export class TransactionsRepository {
       };
     }
 
-    const transactions = await this.model.find(whereParams, undefined,{
+    const transactions = await this.model.find(whereParams, undefined, {
       sort: {
         date: -1,
       },
@@ -72,13 +72,12 @@ export class TransactionsRepository {
     }
 
     const [result] = await aggregate
-
       .project({
         _id: 0,
         income: {
           $cond: [
             {
-              $eq: ['type', 'income'],
+              $eq: ['$type', 'income'],
             },
             '$amount',
             0,
@@ -87,7 +86,7 @@ export class TransactionsRepository {
         expense: {
           $cond: [
             {
-              $eq: ['type', 'expense'],
+              $eq: ['$type', 'expense'],
             },
             '$amount',
             0,
@@ -104,10 +103,12 @@ export class TransactionsRepository {
         },
       })
       .addFields({
+        // Calcule o saldo diretamente dentro deste estágio
         balance: {
           $subtract: ['$incomes', '$expenses'],
         },
       });
+
     return result;
   }
 }
