@@ -50,3 +50,5 @@ transactionsRoutes.get(
   }),
   controller.getFinancialEvolution,
 );
+
+transactionsRoutes.delete('/:id', controller.deleteTransaction);
