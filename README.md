@@ -28,3 +28,10 @@
         - não é possível criar categorias com o mesmo nome
 
 # Listar as categorias (DONE)
+
+
+
+
+## Repositório front-end: https://github.com/gabrielabade/devbills-front
+## visualização 
+<img src="src/devbills-finanças.png" alt="Preview do projeto" width="400">
