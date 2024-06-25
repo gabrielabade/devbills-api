@@ -89,4 +89,15 @@ export class TransactionController {
       next(err);
     }
   };
+
+  async deleteTransaction(req: Request, res: Response) {
+    try {
+      const transactionId = req.params.id;
+      await this.transactionsService.deleteTransaction(transactionId);
+      res.status(200).json({ message: 'Transação excluída com sucesso' });
+    } catch (error) {
+      console.error('Erro ao excluir transação:', error);
+      res.status(500).json({ error: 'Erro ao excluir a transação' });
+    }
+  }
 }

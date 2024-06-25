@@ -15,7 +15,7 @@ import {
 import { TransactionModel } from '../schemas/transactions.schema';
 
 export class TransactionsRepository {
-  constructor(private model: typeof TransactionModel) {}
+  constructor(private model: typeof TransactionModel) { }
 
   async create({
     title,

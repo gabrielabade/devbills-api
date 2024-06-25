@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import { CategoriesRepository } from '../database/repositories/categories.repository';
 import { TransactionsRepository } from '../database/repositories/transactions.repository';
+import { TransactionModel } from '../database/schemas/transactions.schema';
 import {
   CreateTransactionDTO,
   GetDashboardDTO,
@@ -85,5 +86,9 @@ export class TransactionsService {
       await this.transactionsRepository.getFinancialEvolution({ year });
 
     return financialEvolution;
+  }
+
+  async deleteTransaction(transactionId: string) {
+    await TransactionModel.findByIdAndDelete(transactionId);
   }
 }
